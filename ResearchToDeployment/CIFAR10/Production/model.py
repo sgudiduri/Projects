@@ -1,6 +1,5 @@
 # for the convolutional network
 import tensorflow as tf
-import tensorflow_addons as tfa
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, Flatten,BatchNormalization
 from keras.callbacks import ModelCheckpoint
@@ -12,7 +11,7 @@ def cnn_model(kernel_size = (3,3),
               pool_size= (2,2),
               first_filters = 64,
               second_filters = 128,
-              third_filters = 256,
+              third_filters = 64,
               dropout_dense = 0.2):
         
     model = Sequential()
@@ -45,18 +44,15 @@ def cnn_model(kernel_size = (3,3),
     model.add(MaxPooling2D(pool_size=(1,1), strides=1))
 
     model.add(Flatten())
-    model.add(Dense(256, activation = "relu"))
+    model.add(Dense(1024, activation = "relu"))
     model.add(Dropout(dropout_dense))
-    model.add(Dense(10, activation = "softmax"))
-
-    optimizer = tfa.optimizers.AdamW(
-        learning_rate=config.LEARNING_RATE, 
-        weight_decay=config.WEIGHT_DECAY
-    )
+    model.add(Dense(512, activation = "relu"))
+    model.add(Dropout(dropout_dense))
+    model.add(Dense(10, activation = "relu"))
 
     model.compile(
-        optimizer=optimizer,
-        loss="sparse_categorical_crossentropy",
+        optimizer=config.OPTIMIZER,
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
         metrics=["accuracy"],
     )
 
@@ -96,4 +92,3 @@ if __name__ == '__main__':
     #     epochs=config.EPOCHS,
     #     callbacks=[callbacks_list()],
     # )
-    
