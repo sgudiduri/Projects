@@ -12,7 +12,7 @@ def cnn_model(kernel_size = (3,3),
               pool_size= (2,2),
               first_filters = 64,
               second_filters = 128,
-              third_filters = 64,
+              third_filters = 256,
               dropout_dense = 0.2):
         
     model = Sequential()
@@ -51,7 +51,7 @@ def cnn_model(kernel_size = (3,3),
 
     optimizer = tfa.optimizers.AdamW(
         learning_rate=config.LEARNING_RATE, 
-        weight_decay=config.W
+        weight_decay=config.WEIGHT_DECAY
     )
 
     model.compile(
