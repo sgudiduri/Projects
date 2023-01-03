@@ -1,5 +1,6 @@
 import data_management as dm
 import numpy as np
+import preprocessors as p
 
 cifar10_classes = {
     0: 'airplane',
@@ -23,11 +24,13 @@ def make_prediction(x_test):
     predictions= np.argmax(model.predict(x_test),axis=1)
     return predictions
 
-def print_results(predictions):    
+def get_image_results(img):   
+    img = p.convert_to_tensor(p.im_resize(img))
+    predictions = make_prediction(img)
     unique, counts = np.unique(predictions, return_counts=True)
     sums = np.sum(counts)
     results = { cifar10_classes[i[0]] : ((i[1]/sums)*100) for i  in zip(unique, counts)}
-    print(results)
+    return results
   
 if __name__ == '__main__':    
     from sklearn.preprocessing import LabelEncoder
