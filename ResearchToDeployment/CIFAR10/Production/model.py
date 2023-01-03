@@ -51,7 +51,7 @@ def cnn_model(kernel_size = (3,3),
 
     optimizer = tfa.optimizers.AdamW(
         learning_rate=config.LEARNING_RATE, 
-        weight_decay=config.W
+        weight_decay=config.WEIGHT_DECAY
     )
 
     model.compile(
