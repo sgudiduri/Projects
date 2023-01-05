@@ -1,11 +1,7 @@
-#Loading config module.
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')))
-
-from config import config
-from processing import data_management as dm
+import processing.data_management as dm
 import model as m
+import config
+
 
 def run_training(save_result: bool = True):
 

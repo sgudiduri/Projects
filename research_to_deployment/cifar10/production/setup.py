@@ -9,12 +9,12 @@ from setuptools import find_packages, setup
 
 
 # Package meta-data.
-NAME = 'neural_network_model'
-DESCRIPTION = 'Train and deploy neural network model.'
-URL = 'your github project'
-EMAIL = 'your_email@email.com'
-AUTHOR = 'Your name'
-REQUIRES_PYTHON = '>=3.6.0'
+NAME = 'cnn_model'
+DESCRIPTION = 'Train and deploy cnn model.'
+URL = 'https://github.com/sgudiduri/Projects/tree/main/research_to_deployment/cifar10/production'
+EMAIL = 'siddu.gemeni@gmail.com'
+AUTHOR = 'Sid Gudiduri'
+REQUIRES_PYTHON = '>=3.8.15'
 
 
 # What packages are required for this module to be executed?
@@ -72,7 +72,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],

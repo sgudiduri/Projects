@@ -1,20 +1,20 @@
-import pytest
+import sys
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')))
 
-#from cifar_10_model.config import config
+from cifar_10_model.config import config
+import pytest
 
 
 @pytest.fixture
 def cat_dir():
-    test_data_dir = os.path.join(config.DATASET_DIR, 'testing_images')
-    cat_dir = os.path.join(test_data_dir, 'cat')
-
-    return cat_dir
+    test_data_dir = os.path.join(config.TESTING_IMAGES, 'cat')
+    return test_data_dir
 
 
 @pytest.fixture
 def autombile_dir():
-    test_data_dir = os.path.join(config.DATASET_DIR, 'testing_images')
-    autombile_dir = os.path.join(test_data_dir, 'automobile')
+    test_data_dir = os.path.join(config.TESTING_IMAGES, 'automobile')
+    return test_data_dir
 
-    return autombile_dir
+

@@ -6,6 +6,7 @@ import os
 PWD = os.path.dirname(os.path.abspath(__file__))
 PACKAGE_ROOT = os.path.abspath(os.path.join(PWD, '..'))
 TRAINED_MODEL_DIR = os.path.join(PACKAGE_ROOT, 'trained_models')
+TESTING_IMAGES = os.path.join(PACKAGE_ROOT, 'testing_images')
 
 # MODEL FITTING
 IMAGE_SIZE = 32 # 32 for testing, 150 for final model
