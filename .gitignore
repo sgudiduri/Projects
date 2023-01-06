@@ -8,3 +8,5 @@ research_to_deployment/cifar10/production/cifar_10_model.egg-info/PKG-INFO
 research_to_deployment/cifar10/production/cifar_10_model.egg-info/dependency_links.txt
 research_to_deployment/cifar10/production/cifar_10_model.egg-info/requires.txt
 research_to_deployment/cifar10/production/cifar_10_model.egg-info/SOURCES.txt
+research_to_deployment/cifar10/production/dist/cifar_10_model-5.0.0.tar.gz
+research_to_deployment/cifar10/production/dist/cifar_10_model-5.0.0-py3-none-any.whl

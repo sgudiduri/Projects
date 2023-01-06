@@ -2,7 +2,7 @@
 numpy==1.23.5
 scikit-learn==1.1.3
 Keras==2.10.0
-opencv-python==4.6.0
+opencv-python==4.7.0.68
 h5py==3.7.0
 
 # packaging
