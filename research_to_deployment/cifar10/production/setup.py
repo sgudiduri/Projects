@@ -9,7 +9,7 @@ from setuptools import find_packages, setup
 
 
 # Package meta-data.
-NAME = 'cnn_model'
+NAME = 'cifar_10_model'
 DESCRIPTION = 'Train and deploy cnn model.'
 URL = 'https://github.com/sgudiduri/Projects/tree/main/research_to_deployment/cifar10/production'
 EMAIL = 'siddu.gemeni@gmail.com'
