@@ -4,15 +4,8 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Conv2D, MaxPooling2D, Flatten,BatchNormalization
 from keras.callbacks import ModelCheckpoint
 
-
-#Loading config module.
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')))
-
-from config import config
-
-def cnn_model(kernel_size = (3,3),
+def cnn_model(config,
+              kernel_size = (3,3),
               pool_size= (2,2),
               first_filters = 64,
               second_filters = 128,
@@ -63,10 +56,10 @@ def cnn_model(kernel_size = (3,3),
 
     return model
 
-def callbacks_list(moitor_mod = "val_accuracy", save_best=True, save_weights=True):
+def callbacks_list(model_path, moitor_mod = "val_accuracy", save_best=True, save_weights=True):
 
     return [ModelCheckpoint(
-        config.MODEL_PATH,
+        model_path,
         monitor=moitor_mod,
         save_best_only=save_best,
         save_weights_only=save_weights,
@@ -74,11 +67,15 @@ def callbacks_list(moitor_mod = "val_accuracy", save_best=True, save_weights=Tru
 
                               
 if __name__ == '__main__':
-    
-    model = cnn_model()
+
+    #Loading config module.
+    from config import Config
+    c = Config()
+    model = cnn_model(c)
     model.summary()
     
-    from processing import data_management as dm
+    from processing.data_management import DataService
+    dm = DataService(c.IMAGE_SIZE, c.BATCH_SIZE,c.TRAINED_MODEL_DIR, c.MODEL_PATH)
     (new_x_train, new_y_train), (x_test, y_test), (x_val, y_val) = dm.load_data()
 
     print(f"Training data samples: {len(new_x_train)}")
@@ -89,11 +86,11 @@ if __name__ == '__main__':
     val_dataset = dm.make_datasets(x_val, y_val.reshape(-1))
     test_dataset = dm.make_datasets(x_test, y_test.reshape(-1))
 
-    model = cnn_model()
+    model = cnn_model(c)
     model.summary()
     history = model.fit(
         train_dataset,
         validation_data=val_dataset,
-        epochs=config.EPOCHS,
-        callbacks=[callbacks_list()],
+        epochs=c.EPOCHS,
+        callbacks=[callbacks_list(c.MODEL_PATH)],
     )
