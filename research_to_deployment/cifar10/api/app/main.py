@@ -24,11 +24,11 @@ def index(request: Request) -> Any:
     """Basic HTML response."""
     body = (
         "<html>"
-        "<body style='padding: 10px;'>"
-        "<h1>Welcome to the API</h1>"
-        "<div>"
-        "Check the docs: <a href='/docs'>here</a>"
-        "</div>"
+        "<body style='padding: 10px;background-color: beige;'>"
+        "<h1 style='text-align: center; margin-top: 10%;'>Welcome to the Image Classification API</h1>"
+        "<div style='text-align: center; font-size: x-large;'>Check the docs: <a href='/docs'>here</a></div>"
+        "<div id='hl-aria-live-message-container' aria-live='polite' class='visually-hidden'></div>"
+        "<div id='hl-aria-live-alert-container' role='alert' aria-live='assertive' class='visually-hidden'></div>"
         "</body>"
         "</html>"
     )
