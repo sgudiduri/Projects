@@ -25,7 +25,7 @@ class Settings(BaseSettings):
         "https://localhost:8000",  # type: ignore
     ]
 
-    PROJECT_NAME: str = "House Price Prediction API"
+    PROJECT_NAME: str = "CIFAR 10 Imgage Classification API"
 
     class Config:
         case_sensitive = True

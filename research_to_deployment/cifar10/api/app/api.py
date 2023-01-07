@@ -1,6 +1,6 @@
 import numpy as np
 from fastapi import APIRouter, File, UploadFile
-from schemas import Health
+from schemas import Health, ImageClassification
 from config import settings
 from validation import allowed_file
 import cv2
@@ -25,11 +25,11 @@ def health() -> dict:
 
     return health.dict()
 
-@api_router.post("/imageclassifier", response_model=dict, status_code=200)
+@api_router.post("/imageclassifier", response_model=ImageClassification, status_code=200)
 async def classifier(image: UploadFile = File(...)) -> dict:
     """
     Root post
-    """    
+    """        
     if image and allowed_file(image.filename):
         try:
             contents = await image.read()
@@ -40,8 +40,24 @@ async def classifier(image: UploadFile = File(...)) -> dict:
             p = Preprocessor(c.IMAGE_SIZE)
             pred = Predict(dm,p)
             results = pred.get_image_results(img)
-            return results
+            img_class = ImageClassification(
+                classification = list(results.keys())[0],
+                accuracy = list(results.values())[0],
+                message = "successfully Identified"
+            )
         except:
-            return {"filename": f"{image.filename} not allowed"}
+            img_class = ImageClassification(
+                classification = "",
+                accuracy = "",
+                message = "oops try again"
+            )
+            return img_class.dict()
     else:    
-        return {"filename": f"{image.filename} not allowed"}
+        img_class = ImageClassification(
+            classification = "",
+            accuracy = "",
+            message = "File type not acceptable"
+        )
+    
+    return img_class.dict()
+       
