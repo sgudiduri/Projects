@@ -1,14 +1,14 @@
 include *.txt
 include *.md
 include *.cfg
-include *.pkl
+include *.h5
 recursive-include ./cifar_10_model/*.py
 
-include cifar_10_model/trained_models/*.pkl
-include cifar_10_model/trained_models/*.h5
-include cifar_10_model/VERSION
-include cifar_10_model/testing_images/automobile/automobile.png
-include cifar_10_model/testing_images/cat/cat/1.png
+graft src/cifar_10_model/trained_models
+
+include src/cifar_10_model/VERSION
+include src/cifar_10_model/testing_images/automobile/automobile.png
+include src/cifar_10_model/testing_images/cat/cat.png
 
 include ./requirements.txt
 exclude *.log

@@ -2,7 +2,6 @@ import logging
 import sys
 from types import FrameType
 from typing import List, cast
-
 from loguru import logger
 from pydantic import AnyHttpUrl, BaseSettings
 
@@ -51,7 +50,6 @@ class InterceptHandler(logging.Handler):
             level,
             record.getMessage(),
         )
-
 
 def setup_app_logging(config: Settings) -> None:
     """Prepare custom logging for our application."""
