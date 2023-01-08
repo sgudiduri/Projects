@@ -1,23 +1,19 @@
-FROM python:3.6.4
+# 
+FROM python:3.8
 
-# Create the user that will run the app
-RUN adduser --disabled-password --gecos '' ml-api-user
+# 
+WORKDIR /code
 
-WORKDIR /opt/ml_api
+# 
+COPY ./requirements.txt /code/requirements.txt
 
-ARG PIP_EXTRA_INDEX_URL
-ENV FLASK_APP run.py
+# 
+RUN apt-get update
+RUN apt-get install ffmpeg libsm6 libxext6 -y
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-# Install requirements, including from Gemfury
-ADD ./packages/ml_api /opt/ml_api/
-RUN pip install --upgrade pip
-RUN pip install -r /opt/ml_api/requirements.txt
+# 
+COPY ./app /code/app
 
-RUN chmod +x /opt/ml_api/run.sh
-RUN chown -R ml-api-user:ml-api-user ./
-
-USER ml-api-user
-
-EXPOSE 5000
-
-CMD ["bash", "./run.sh"]
+# 
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
