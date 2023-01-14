@@ -2,7 +2,7 @@ from typing import Any
 
 from fastapi import APIRouter, FastAPI, Request, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.responses import RedirectResponse, FileResponse
 from loguru import logger
 import os
 #os.system("pip install opencv-python")
@@ -34,25 +34,9 @@ root_router = APIRouter()
 async def favicon():
     return FileResponse(favicon_path)
 
-@root_router.get("/")
-async def index(request: Request) -> Any:
-    """Basic HTML response."""
-    body = (
-        "<html>"
-        "<head>"
-        "<link rel='icon' type='image/x-icon' href='/favicon.ico'>"
-        "</head>"
-        "<body style='padding: 10px;background-color: beige;'>"
-        "<h1 style='text-align: center; margin-top: 10%;'>Welcome to the Image Classification API</h1>"
-        "<div style='text-align: center; font-size: x-large;'>Check the docs: <a href='/docs'>here</a></div>"
-        "<div id='hl-aria-live-message-container' aria-live='polite' class='visually-hidden'></div>"
-        "<div id='hl-aria-live-alert-container' role='alert' aria-live='assertive' class='visually-hidden'></div>"
-        "</body>"
-        "</html>"
-    )
-
-    return HTMLResponse(content=body)
-
+@app.get("/")
+async def docs_redirect():
+    return RedirectResponse(url='/docs')
 
 @root_router.get("/health", response_model=dict, status_code=200)
 async def health() -> dict:
