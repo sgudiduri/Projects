@@ -2,7 +2,7 @@ from typing import Any
 
 from fastapi import APIRouter, FastAPI, Request, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
 from loguru import logger
 import os
 #os.system("pip install opencv-python")
@@ -15,8 +15,7 @@ from cifar_10_model.predict import Predict
 from cifar_10_model.processing.data_management import DataService
 from cifar_10_model.processing.preprocessors import Preprocessor
 
-
-
+favicon_path = 'favicon.ico'
 api_router = APIRouter()
 
 app = FastAPI(
@@ -31,11 +30,18 @@ def allowed_file(filename):
 root_router = APIRouter()
 
 
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse(favicon_path)
+
 @root_router.get("/")
-def index(request: Request) -> Any:
+async def index(request: Request) -> Any:
     """Basic HTML response."""
     body = (
         "<html>"
+        "<head>"
+        "<link rel='icon' type='image/x-icon' href='/favicon.ico'>"
+        "</head>"
         "<body style='padding: 10px;background-color: beige;'>"
         "<h1 style='text-align: center; margin-top: 10%;'>Welcome to the Image Classification API</h1>"
         "<div style='text-align: center; font-size: x-large;'>Check the docs: <a href='/docs'>here</a></div>"
@@ -49,7 +55,7 @@ def index(request: Request) -> Any:
 
 
 @root_router.get("/health", response_model=dict, status_code=200)
-def health() -> dict:
+async def health() -> dict:
     """
     Root Get
     """

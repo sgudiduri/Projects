@@ -39,7 +39,7 @@ def list_reqs(fname="requirements.txt"):
 # Where the magic happens:
 setup(
     name=NAME,
-    version="7.2.0",
+    version="7.4.0",
     description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type="text/markdown",

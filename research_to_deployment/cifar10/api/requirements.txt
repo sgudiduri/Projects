@@ -1,5 +1,5 @@
 #Cifar 10 model from package
-cifar-10-model==7.3.0
+cifar-10-model==7.4.0
 
 #uvicorn==0.20.0
 #fastapi>=0.88.0,<1.0.0
