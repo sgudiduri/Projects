@@ -1,9 +1,11 @@
-uvicorn>=0.20.0,<0.18.0
-fastapi>=0.88.0,<1.0.0
+#Cifar 10 model from package
+cifar-10-model==7.3.0
+
+#uvicorn==0.20.0
+#fastapi>=0.88.0,<1.0.0
 python-multipart>=0.0.5,<0.1.0
 pydantic>=1.10.2,<1.11.0
 typing_extensions>=4.4.0,<4.6.0
 loguru>=0.5.3,<0.6.0
 
-#Cifar 10 model from package
-cifar-10-model==7.2.0
+
