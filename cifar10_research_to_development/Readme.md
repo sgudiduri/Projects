@@ -42,8 +42,11 @@ Root
 ### API
 #### This part of the project deals with 
 * Creating Fast API with package
-* Deploy to Heroku (PAAS)
+* Create docker image and container 
+* Deploy docker container to Heroku (PAAS)
 * Testing and logging Heroku APP
+
+### Next steps are to automate end to end workflow for CI/CD pipelines
 
 
 Links
